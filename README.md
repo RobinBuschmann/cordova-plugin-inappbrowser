@@ -21,7 +21,7 @@
 
 This plugin provides a web browser view that displays when calling `cordova.InAppBrowser.open()`.
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
 
 The `cordova.InAppBrowser.open()` function is defined to be a drop-in replacement
 for the `window.open()` function.  Existing `window.open()` calls can use the
@@ -87,42 +87,45 @@ instance, or the system browser.
     - `_blank`: Opens in the `InAppBrowser`.
     - `_system`: Opens in the system's web browser.
 
-- __options__: Options for the `InAppBrowser`. Optional, defaulting to: `location=yes`. _(String)_
+- __options__: Options for the `InAppBrowser`. Optional, defaulting to: `location: true`. _(String)_
 
     The `options` string must not contain any blank space, and each feature's name/value pairs must be separated by a comma. Feature names are case insensitive. All platforms support the value below:
 
-    - __location__: Set to `yes` or `no` to turn the `InAppBrowser`'s location bar on or off.
+    - __location__: Set to `true` or `false` to turn the `InAppBrowser`'s location bar on or off.
 
     Android only:
 
-    - __hidden__: set to `yes` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `no` (default) to have the browser open and load normally.
-    - __clearcache__: set to `yes` to have the browser's cookie cache cleared before the new window is opened
-    - __clearsessioncache__: set to `yes` to have the session cookie cache cleared before the new window is opened
-    - __zoom__: set to `yes` to show Android browser's zoom controls, set to `no` to hide them.  Default value is `yes`.
-    - __hardwareback__: set to `yes` to use the hardware back button to navigate backwards through the `InAppBrowser`'s history. If there is no previous page, the `InAppBrowser` will close.  The default value is `yes`, so you must set it to `no` if you want the back button to simply close the InAppBrowser.
-    - __mediaPlaybackRequiresUserAction__: Set to `yes` to prevent HTML5 audio or video from autoplaying (defaults to `no`).
+    - __hidden__: set to `true` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `false` (default) to have the browser open and load normally.
+    - __clearcache__: set to `true` to have the browser's cookie cache cleared before the new window is opened
+    - __clearsessioncache__: set to `true` to have the session cookie cache cleared before the new window is opened
+    - __zoom__: set to `true` to show Android browser's zoom controls, set to `false` to hide them.  Default value is `true`.
+    - __hardwareback__: set to `true` to use the hardware back button to navigate backwards through the `InAppBrowser`'s history. If there is no previous page, the `InAppBrowser` will close.  The default value is `true`, so you must set it to `false` if you want the back button to simply close the InAppBrowser.
+    - __mediaPlaybackRequiresUserAction__: Set to `true` to prevent HTML5 audio or video from autoplaying (defaults to `false`).
+    - __isHistoryNavVisible__: Set to `true` or `false` to set the visibility of forward/backward buttons to VISIBLE or INVISIBLE.
+    - __isLocationUrlVisible__: Set to `true` or `false` to set the visibility of location edit text field to VISIBLE or INVISIBLE.
+    - __isCloseButtonVisible__: Set to `true` or `false` to set the visibility of close button to VISIBLE or INVISIBLE.
 
     iOS only:
 
     - __closebuttoncaption__: set to a string to use as the __Done__ button's caption. Note that you need to localize this value yourself.
-    - __disallowoverscroll__: Set to `yes` or `no` (default is `no`). Turns on/off the UIWebViewBounce property.
-    - __hidden__: set to `yes` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `no` (default) to have the browser open and load normally.
-    - __clearcache__: set to `yes` to have the browser's cookie cache cleared before the new window is opened
-    - __clearsessioncache__: set to `yes` to have the session cookie cache cleared before the new window is opened
-    - __toolbar__:  set to `yes` or `no` to turn the toolbar on or off for the InAppBrowser (defaults to `yes`)
-    - __enableViewportScale__:  Set to `yes` or `no` to prevent viewport scaling through a meta tag (defaults to `no`).
-    - __mediaPlaybackRequiresUserAction__: Set to `yes` to prevent HTML5 audio or video from autoplaying (defaults to `no`).
-    - __allowInlineMediaPlayback__: Set to `yes` or `no` to allow in-line HTML5 media playback, displaying within the browser window rather than a device-specific playback interface. The HTML's `video` element must also include the `webkit-playsinline` attribute (defaults to `no`)
-    - __keyboardDisplayRequiresUserAction__: Set to `yes` or `no` to open the keyboard when form elements receive focus via JavaScript's `focus()` call (defaults to `yes`).
-    - __suppressesIncrementalRendering__: Set to `yes` or `no` to wait until all new view content is received before being rendered (defaults to `no`).
+    - __disallowoverscroll__: Set to `true` or `false` (default is `false`). Turns on/off the UIWebViewBounce property.
+    - __hidden__: set to `true` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `false` (default) to have the browser open and load normally.
+    - __clearcache__: set to `true` to have the browser's cookie cache cleared before the new window is opened
+    - __clearsessioncache__: set to `true` to have the session cookie cache cleared before the new window is opened
+    - __toolbar__:  set to `true` or `false` to turn the toolbar on or off for the InAppBrowser (defaults to `true`)
+    - __enableViewportScale__:  Set to `true` or `false` to prevent viewport scaling through a meta tag (defaults to `false`).
+    - __mediaPlaybackRequiresUserAction__: Set to `true` to prevent HTML5 audio or video from autoplaying (defaults to `false`).
+    - __allowInlineMediaPlayback__: Set to `true` or `false` to allow in-line HTML5 media playback, displaying within the browser window rather than a device-specific playback interface. The HTML's `video` element must also include the `webkit-playsinline` attribute (defaults to `false`)
+    - __keyboardDisplayRequiresUserAction__: Set to `true` or `false` to open the keyboard when form elements receive focus via JavaScript's `focus()` call (defaults to `true`).
+    - __suppressesIncrementalRendering__: Set to `true` or `false` to wait until all new view content is received before being rendered (defaults to `false`).
     - __presentationstyle__:  Set to `pagesheet`, `formsheet` or `fullscreen` to set the [presentation style](http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle) (defaults to `fullscreen`).
     - __transitionstyle__: Set to `fliphorizontal`, `crossdissolve` or `coververtical` to set the [transition style](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle) (defaults to `coververtical`).
     - __toolbarposition__: Set to `top` or `bottom` (default is `bottom`). Causes the toolbar to be at the top or bottom of the window.
 
     Windows only:
 
-    - __hidden__: set to `yes` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `no` (default) to have the browser open and load normally.
-    - __fullscreen__: set to `yes` to create the browser control without a border around it. Please note that if __location=no__ is also specified, there will be no control presented to user to close IAB window.
+    - __hidden__: set to `true` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `false` (default) to have the browser open and load normally.
+    - __fullscreen__: set to `true` to create the browser control without a border around it. Please note that if __location: false__ is also specified, there will be no control presented to user to close IAB window.
 
 ### Supported Platforms
 
@@ -137,8 +140,8 @@ instance, or the system browser.
 
 ### Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
-    var ref2 = cordova.InAppBrowser.open(encodeURI('http://ja.m.wikipedia.org/wiki/ハングル'), '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
+    var ref2 = cordova.InAppBrowser.open(encodeURI('http://ja.m.wikipedia.org/wiki/ハングル'), '_blank', {location: true});
 
 ### Firefox OS Quirks
 
@@ -241,7 +244,7 @@ The object returned from a call to `cordova.InAppBrowser.open`.
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
     ref.addEventListener('loadstart', function(event) { alert(event.url); });
 
 ## removeEventListener
@@ -273,7 +276,7 @@ The function is passed an `InAppBrowserEvent` object.
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
     var myCallback = function(event) { alert(event.url); }
     ref.addEventListener('loadstart', myCallback);
     ref.removeEventListener('loadstart', myCallback);
@@ -298,7 +301,7 @@ The function is passed an `InAppBrowserEvent` object.
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
     ref.close();
 
 ## show
@@ -319,7 +322,7 @@ The function is passed an `InAppBrowserEvent` object.
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'hidden=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {hidden: true});
     // some time later...
     ref.show();
 
@@ -352,7 +355,7 @@ The function is passed an `InAppBrowserEvent` object.
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
     ref.addEventListener('loadstop', function() {
         ref.executeScript({file: "myscript.js"});
     });
@@ -388,7 +391,7 @@ Due to [MSDN docs](https://msdn.microsoft.com/en-us/library/windows.ui.xaml.cont
 
 ### Quick Example
 
-    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', {location: true});
     ref.addEventListener('loadstop', function() {
         ref.insertCSS({file: "mystyles.css"});
     });

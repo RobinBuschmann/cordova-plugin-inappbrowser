@@ -84,7 +84,7 @@
         }
     };
 
-    module.exports = function(strUrl, strWindowName, strWindowFeatures, callbacks) {
+    module.exports = function(strUrl, strWindowName, options, callbacks) {
         // Don't catch calls that write to existing frames (e.g. named iframes).
         if (window.frames && window.frames[strWindowName]) {
             var origOpenFunc = modulemapper.getOriginalSymbol(window, 'open');
@@ -103,9 +103,20 @@
            iab._eventHandler(eventname);
         };
 
-        strWindowFeatures = strWindowFeatures || "";
+        var features = [];
 
-        exec(cb, cb, "InAppBrowser", "open", [strUrl, strWindowName, strWindowFeatures]);
+        if(options) {
+
+            for (var key in options) {
+              if (options.hasOwnProperty(key)) {
+                features.push(key + '=' + (options[key] ? 'yes' : 'no'));
+              }
+            }
+        }
+
+        var strFeatures = features.join(',');
+
+        exec(cb, cb, "InAppBrowser", "open", [strUrl, strWindowName, strFeatures]);
         return iab;
     };
 })();
